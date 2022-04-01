@@ -2,7 +2,10 @@ import search from '../assets/images/search.png'
 import heart from '../assets/images/heart.png'
 import { Link,Outlet } from 'react-router-dom';
 import CartTotal from './CartTotal';
-function Header(){
+function Header({listCart, setListCart}){
+    function cartLength(cart){
+        return cart.length;
+    }
     return (
         <>
             <header className="header">
@@ -17,7 +20,7 @@ function Header(){
                             <nav className="header__menu mobile-menu">
                                 <ul>
                                     <li><Link to="/" className="active">Acceuil</Link></li>
-                                    <li><Link to="/cart">Panier</Link></li>
+                                    <li><Link to="/cart">Panier <span className='badge badge-danger'>{cartLength(listCart)}</span></Link></li>
                                     <li><Link to="/profil">Profile</Link></li>
                                     <li><Link to="/contact">Contact</Link></li>
                                 </ul>
@@ -27,7 +30,7 @@ function Header(){
                             <div className="header__nav__option">
                                 <Link className="search-switch" to="/search"><img src={search} alt="rechercher" /></Link>
                                 <Link to="/favs"><img src={heart} alt="rechercher" /></Link>
-                                <CartTotal />
+                                <CartTotal listCart={listCart} setListCart={setListCart} />
                                 
                             </div>
                         </div>
